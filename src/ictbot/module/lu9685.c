@@ -1,6 +1,6 @@
 #include "lu9685.h"
 
-LU9685Struct *LU9685_Init(uint8_t *servo_arr_len_p) {
+void LU9685_Init(LU9685Struct *servo_arr_p, uint8_t *servo_arr_len_p) {
     LU9685Struct servo_arr[] = {
         {3, 0},
         {4, 0},
@@ -10,9 +10,8 @@ LU9685Struct *LU9685_Init(uint8_t *servo_arr_len_p) {
     };
     uint8_t servo_arr_len = LENGTH(servo_arr);
 
+    servo_arr_p     = &servo_arr;
     servo_arr_len_p = &servo_arr_len;
-
-    return &servo_arr;
 }
 
 void LU9685_Reset() {
@@ -61,6 +60,21 @@ void LU9685_SetAngleMulti(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     printf("[lu9685] move servos done!\n");
 }
 
+void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
+                                                 uint8_t servo_action) {
+    printf("[lu9685] move servos to action 0x%x...\n", servo_action);
+    switch (servo_action) {
+        case 0x01:
+            LU9685_SetAction0X01(servo_arr_p, servo_arr_len);
+            break;
+        case 0x02:
+            break;
+        default:
+            break;
+    }
+    printf("[lu9685] move servos servo_act done!\n\n");
+}
+
 void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     LU9685Struct *servo_arr_p_t;
     servo_arr_p_t = servo_arr_p;
@@ -75,19 +89,4 @@ void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     servo_arr_p_t++;
     servo_arr_p_t->val = 70;
     LU9685_SetAngleMulti(servo_arr_p, servo_arr_len);
-}
-
-void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
-                                                 uint8_t servo_act) {
-    printf("[lu9685] move servos to servo_act 0x%x...\n", servo_act);
-    switch (servo_act) {
-        case 0x01:
-            LU9685_SetAction0X01(servo_arr_p, servo_arr_len);
-            break;
-        case 0x02:
-            break;
-        default:
-            break;
-    }
-    printf("[lu9685] move servos servo_act done!\n\n");
 }
