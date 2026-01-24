@@ -1,7 +1,7 @@
 #include "uart.h"
 
 uint32_t uart_recv_arr_g[4] = {0};
-uint8_t  uart_recv_cnt = 0;
+uint8_t  uart_recv_cnt      = 0;
 
 void UART_Init() {
     GPIO_0_REG_IOFCFG = (uint32_t)0x3;
@@ -15,8 +15,8 @@ void UART_Init() {
     printf("REG_DIV: %x REG_LCR: %x\n", UART1_REG_DIV, UART1_REG_LCR);
 }
 
-uint8_t UART_RecvData(uint32_t data, uint8_t *action) {
-    uart_recv_arr_g[uart_recv_cnt] = data;
+uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p) {
+    uart_recv_arr_g[uart_recv_cnt] = uart_data;
     uart_recv_cnt++;
 
     if (uart_recv_cnt == 2) {
@@ -29,7 +29,7 @@ uint8_t UART_RecvData(uint32_t data, uint8_t *action) {
     }
     else if (uart_recv_cnt == 4) {
         if ((uint8_t)(uart_recv_arr_g[0] + uart_recv_arr_g[1] + uart_recv_arr_g[2]) == uart_recv_arr_g[3]) {
-            action = &uart_recv_arr_g[2];
+            servo_action_p = &uart_recv_arr_g[2];
             printf("[uart] recv [");
             PRINT_ARR(uart_recv_arr_g);
             printf("[uart] checksum is ok!\n");
@@ -47,7 +47,7 @@ uint8_t UART_RecvData(uint32_t data, uint8_t *action) {
     return 0;
 }
 
-void UART_SendData(uint8_t flag) {
+void UART_SendData(uint8_t servo_flag) {
     printf("[uart] send response...\n");
     uint32_t data = (flag == 1) ? 0x00 :
                     (flag == 2) ? 0xFF : 0xFF;

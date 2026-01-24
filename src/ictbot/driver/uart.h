@@ -25,5 +25,8 @@
     }                                           \
     printf("\n");                               \
 
+void UART_Init();
+uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p);
+void UART_SendData(uint8_t uart_flag);
 
 #endif
