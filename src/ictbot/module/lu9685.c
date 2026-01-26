@@ -10,7 +10,7 @@ void LU9685_Init(LU9685Struct *servo_arr_p, uint8_t *servo_arr_len_p) {
     };
     uint8_t servo_arr_len = LENGTH(servo_arr);
 
-    servo_arr_p     = &servo_arr;
+    servo_arr_p     = &servo_arr[0];
     servo_arr_len_p = &servo_arr_len;
 }
 
