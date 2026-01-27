@@ -1,7 +1,7 @@
 #include "uart.h"
 
 uint32_t uart_recv_arr_g[4] = {0};
-uint8_t  uart_recv_cnt_g      =  0;
+uint8_t  uart_recv_cnt_g    =  0;
 
 void UART_Init() {
     GPIO_0_REG_IOFCFG = (uint32_t)0x3;
