@@ -4,7 +4,7 @@
 #include <am.h>
 #include <klib.h>
 #include <klib-macros.h>
-#include <ysyx.h>
+#include <ecos.h>
 
 typedef struct {
     uint8_t num;
