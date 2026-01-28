@@ -1,21 +1,7 @@
+#include "driver/i2c.h"
+#include "driver/timer.h"
 #include "driver/uart.h"
 #include "module/lu9685.h"
-
-void Timer_Init() {
-    timer_init(1, 100000);
-}
-
-void Timer_DelayMs(uint32_t val) {
-    TIMER_0_REG_CTRL = (uint32_t)0xD;
-    for (int i = 0; i < val; ++i) {
-        while (TIMER_0_REG_STAT == 0);
-    }
-    TIMER_0_REG_CTRL = (uint32_t)0xD;
-}
-
-void I2C_Init() {
-    i2c_config();
-}
 
 void main() {
     Timer_Init();
@@ -28,8 +14,8 @@ void main() {
     LU9685_Init(&servo_arr, &servo_arr_len);
 
     while (1) {
-        while (((UART1_REG_LSR & 0x080) >> 7) == 1);
-        uint8_t uart_flag = UART_RecvData(UART1_REG_TRX, &servo_action);
+        while (((UART_1_REG_LSR & 0x080) >> 7) == 1);
+        uint8_t uart_flag = UART_RecvData(UART_1_REG_TRX, &servo_action);
         if (uart_flag == UART_STATUS_SUCCESS) {
             UART_SendData(uart_flag);
             LU9685_SetAction(&servo_arr, servo_arr_len, servo_action);

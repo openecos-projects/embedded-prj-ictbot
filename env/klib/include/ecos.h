@@ -1,5 +1,5 @@
-#ifndef _YSYX_H__
-#define _YSYX_H__
+#ifndef _ECOS_H__
+#define _ECOS_H__
 
 #include "stdint.h"
 #include <stdint.h>
