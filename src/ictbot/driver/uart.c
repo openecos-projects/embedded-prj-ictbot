@@ -7,12 +7,10 @@ void UART_Init() {
     GPIO_0_REG_IOFCFG = (uint32_t)0x3;
     GPIO_0_REG_PINMUX = (uint32_t)0;
 
-    // printf("REG_DIV: %x REG_LCR: %x\n", UART1_REG_DIV, UART1_REG_LCR);
-    UART1_REG_DIV = (uint32_t)868;        // 100x10^6 / 115200
-    UART1_REG_FCR = (uint32_t)0b1111;     // clear tx and rx fifo
-    UART1_REG_FCR = (uint32_t)0b1100;
-    UART1_REG_LCR = (uint32_t)0b00011111; // 8N1, en all irq
-    printf("REG_DIV: %x REG_LCR: %x\n", UART1_REG_DIV, UART1_REG_LCR);
+    UART_1_REG_DIV = (uint32_t)868;        // 100x10^6 / 115200
+    UART_1_REG_FCR = (uint32_t)0b1111;     // clear tx and rx fifo
+    UART_1_REG_FCR = (uint32_t)0b1100;
+    UART_1_REG_LCR = (uint32_t)0b00011111; // 8N1, en all irq
 }
 
 uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p) {
@@ -54,7 +52,7 @@ void UART_SendData(uint8_t uart_flag) {
     printf("[uart] send response...\n");
     uint32_t uart_data = (uart_flag == 1) ? 0x00 :
                          (uart_flag == 2) ? 0xFF : 0xFF;
-    while (((UART1_REG_LSR & 0x100) >> 8) == 1);
-    UART1_REG_TRX = uart_data;
+    while (((UART_1_REG_LSR & 0x100) >> 8) == 1);
+    UART_1_REG_TRX = uart_data;
     printf("[uart] send response 0x%x done!\n", uart_data);
 }

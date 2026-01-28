@@ -6,12 +6,12 @@
 #include <klib-macros.h>
 #include <ecos.h>
 
-#define UART1_BASE_ADDR    0x10001000
-#define UART1_REG_LCR      *((volatile uint32_t *)(UART1_BASE_ADDR + 0))
-#define UART1_REG_DIV      *((volatile uint32_t *)(UART1_BASE_ADDR + 4))
-#define UART1_REG_TRX      *((volatile uint32_t *)(UART1_BASE_ADDR + 8))
-#define UART1_REG_FCR      *((volatile uint32_t *)(UART1_BASE_ADDR + 12))
-#define UART1_REG_LSR      *((volatile uint32_t *)(UART1_BASE_ADDR + 16))
+#define UART_1_BASE_ADDR    0x10001000
+#define UART_1_REG_LCR      *((volatile uint32_t *)(UART_1_BASE_ADDR + 0))
+#define UART_1_REG_DIV      *((volatile uint32_t *)(UART_1_BASE_ADDR + 4))
+#define UART_1_REG_TRX      *((volatile uint32_t *)(UART_1_BASE_ADDR + 8))
+#define UART_1_REG_FCR      *((volatile uint32_t *)(UART_1_BASE_ADDR + 12))
+#define UART_1_REG_LSR      *((volatile uint32_t *)(UART_1_BASE_ADDR + 16))
 
 #define UART_STATUS_PASS    0
 #define UART_STATUS_SUCCESS 1
