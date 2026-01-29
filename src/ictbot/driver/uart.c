@@ -32,7 +32,7 @@ uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p) {
             usrt_recv_arr_t = (uint8_t)uart_recv_arr_g[2];
             servo_action_p = &usrt_recv_arr_t;
             printf("[uart] recv [");
-            PRINT_ARR(uart_recv_arr_g);
+            PRINT_ARR(uart_recv_arr_g, "uart");
             printf("[uart] checksum is ok!\n");
             uart_recv_cnt_g = 0;
             return 1;

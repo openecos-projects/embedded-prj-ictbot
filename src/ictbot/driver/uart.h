@@ -5,6 +5,7 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <ecos.h>
+#include "../util/debug.h"
 
 #define UART_1_BASE_ADDR    0x10001000
 #define UART_1_REG_LCR      *((volatile uint32_t *)(UART_1_BASE_ADDR + 0))
@@ -16,18 +17,6 @@
 #define UART_STATUS_PASS    0
 #define UART_STATUS_SUCCESS 1
 #define UART_STATUS_ERROR   2
-
-#define PRINT_ARR(arr) \
-    for (uint8_t i = 0; i < LENGTH(arr); i++) { \
-        printf("0x%x", arr[i]);                 \
-        if (i < LENGTH(arr) - 1) { \
-            printf(", "); \
-        }\
-        else { \
-            printf("]"); \
-        } \
-    }                                           \
-    printf("\n");                               \
 
 void UART_Init();
 uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p);
