@@ -1,7 +1,9 @@
 #include "timer.h"
 
 void Timer_Init() {
+    printf("[timer] init...\n");
     timer_init(1, 100000);
+    printf("[timer] init done!\n");
 }
 
 void Timer_DelayMs(uint32_t val) {

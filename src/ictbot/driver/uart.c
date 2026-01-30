@@ -4,6 +4,7 @@ uint32_t uart_recv_arr_g[4] = {0};
 uint8_t  uart_recv_cnt_g    =  0;
 
 void UART_Init(uint32_t baud) {
+    printf("[uart] init...\n");
     GPIO_0_REG_IOFCFG = (uint32_t)0x3;
     GPIO_0_REG_PINMUX = (uint32_t)0;
 
@@ -12,13 +13,16 @@ void UART_Init(uint32_t baud) {
     UART_1_REG_FCR = (uint32_t)0b1111;     // clear tx and rx fifo
     UART_1_REG_FCR = (uint32_t)0b1100;
     UART_1_REG_LCR = (uint32_t)0b00011111; // 8N1, en all irq
+    printf("[uart] init done!\n");
 }
 
 uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p) {
-    uint8_t usrt_recv_arr_t = 0;
+    uint8_t uart_recv_arr_t = 0;
 
     uart_recv_arr_g[uart_recv_cnt_g] = uart_data;
     uart_recv_cnt_g++;
+
+    printf("[uart] recv data is 0x%x\n", uart_data);
 
     if (uart_recv_cnt_g == 2) {
         if (uart_recv_arr_g[0] != 0xFF || uart_recv_arr_g[1] != 0xFF) {
@@ -30,8 +34,8 @@ uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p) {
     }
     else if (uart_recv_cnt_g == 4) {
         if ((uint8_t)(uart_recv_arr_g[0] + uart_recv_arr_g[1] + uart_recv_arr_g[2]) == uart_recv_arr_g[3]) {
-            usrt_recv_arr_t = (uint8_t)uart_recv_arr_g[2];
-            servo_action_p = &usrt_recv_arr_t;
+            uart_recv_arr_t = (uint8_t)uart_recv_arr_g[2];
+            servo_action_p = &uart_recv_arr_t;
             printf("[uart] recv [");
             PRINT_ARR(uart_recv_arr_g, "uart");
             printf("[uart] checksum is ok!\n");

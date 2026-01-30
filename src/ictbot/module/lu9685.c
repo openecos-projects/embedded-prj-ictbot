@@ -1,6 +1,9 @@
 #include "lu9685.h"
+#include "../util/debug.h"
 
 void LU9685_Init(LU9685Struct *servo_arr_p, uint8_t *servo_arr_len_p) {
+    printf("[lu9685] init servo...\n");
+
     LU9685Struct servo_arr[] = {
         {3, 0},
         {4, 0},
@@ -12,6 +15,8 @@ void LU9685_Init(LU9685Struct *servo_arr_p, uint8_t *servo_arr_len_p) {
 
     servo_arr_p     = &servo_arr[0];
     servo_arr_len_p = &servo_arr_len;
+
+    printf("[lu9685] init servo done!\n");
 }
 
 void LU9685_Reset() {
@@ -53,6 +58,8 @@ void LU9685_SetAngleMulti(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
         }
         servo_arr_p++;
     }
+
+    PRINT_ARR(servo_arr, "[lu9685]");
 
     printf("[lu9685] move servos [%s] to [%s] degrees...\n", servo_num_str,
                                                              servo_val_str);

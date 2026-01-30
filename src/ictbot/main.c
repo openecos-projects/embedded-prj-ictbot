@@ -6,7 +6,7 @@
 void main() {
     Timer_Init();
     I2C_Init();
-    UART_Init();
+    UART_Init(9600);
 
     LU9685Struct servo_arr;
     uint8_t      servo_arr_len = 0;
