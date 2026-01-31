@@ -2,7 +2,7 @@
 #define DEBUG_H
 
 #define PRINT_ARR(arr, str)                     \
-    printf("[%s] recv [", str);                 \
+    printf("[%s] data [", str);                 \
     for (uint8_t i = 0; i < LENGTH(arr); i++) { \
         printf("0x%x", arr[i]);                 \
         if (i < LENGTH(arr) - 1) {              \
