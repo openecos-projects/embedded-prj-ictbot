@@ -18,7 +18,7 @@
 #define UART_STATUS_SUCCESS 1
 #define UART_STATUS_ERROR   2
 
-void UART_Init();
+void UART_Init(uint32_t baud);
 uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p);
 void UART_SendData(uint8_t uart_flag);
 
