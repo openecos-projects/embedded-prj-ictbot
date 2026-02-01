@@ -1,51 +1,8 @@
 #include "lu9685.h"
 
-void i2c_wr_nbyte_soft(uint8_t slv_addr, uint16_t reg_addr, uint8_t type,
-                       uint8_t num, uint8_t *data) {
-  I2C_Soft_Start();
-  I2C_Soft_WriteByte(slv_addr);
-
-//   if (type == I2C_DEV_ADDR_16BIT) {
-//     I2C_Soft_WriteByte((uint8_t)((reg_addr >> 8) & 0xFF));
-//     I2C_Soft_WriteByte((uint8_t)(reg_addr & 0xFF));
-//   } else {
-    I2C_Soft_WriteByte((uint8_t)(reg_addr & 0xFF));
-//   }
-
-  for (int i = 0; i < num; ++i) {
-    I2C_Soft_WriteByte(*data);
-    ++data;
-  }
-  I2C_Soft_Stop();
-}
-
-// void LU9685_Init(LU9685Struct *servo_arr_p, uint8_t *servo_arr_len_p) {
-//     printf("[lu9685] init servo...\n");
-
-//     static LU9685Struct servo_arr[] = {
-//         {9, 0},
-//         {10, 0},
-//         {11, 0},
-//         {12, 0},
-//         {13, 0}
-//     };
-//     uint8_t servo_arr_len = LENGTH(servo_arr);
-
-//     servo_arr_p     = &servo_arr[0];
-//     servo_arr_len_p = &servo_arr_len;
-
-//     printf("[lu9685] init servo done!\n");
-// }
-
-// void LU9685_Reset() {
-//     printf("[lu9685] reset servo...\n");
-//     i2c_wr_nbyte_soft(0x00, 0xFB, I2C_DEV_ADDR_8BIT, 1, (uint8_t *)0xFB);
-//     printf("[lu9685] reset servo done!\n");
-// }
-
 void LU9685_SetAngleSingle(uint8_t servo_idx, uint8_t servo_val) {
     printf("[lu9685] move servo %d to %d degree...\n", servo_idx, servo_val);
-    i2c_wr_nbyte_soft(0x00, servo_idx, I2C_DEV_ADDR_8BIT, 1, &servo_val);
+    I2C_Soft_WriteByteN(0x00, servo_idx, I2C_DEV_ADDR_8BIT, 1, &servo_val);
     printf("[lu9685] move servo done!\n");
 }
 
@@ -80,7 +37,7 @@ void LU9685_SetAngleMulti(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     PRINT_ARR(servo_arr, "lu9685");
     printf("[lu9685] move servo [%s] to [%s] degrees...\n", servo_num_str,
                                                             servo_val_str);
-    i2c_wr_nbyte_soft(0x00, 0xFD, I2C_DEV_ADDR_8BIT, LENGTH(servo_arr), servo_arr);
+    I2C_Soft_WriteByteN(0x00, 0xFD, I2C_DEV_ADDR_8BIT, LENGTH(servo_arr), servo_arr);
     printf("[lu9685] move servo done!\n");
 }
 
@@ -88,8 +45,8 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
                                                  uint8_t servo_action) {
     printf("[lu9685] move servo action 0x%x...\n", servo_action);
     switch (servo_action) {
-        case 0x01:
-            LU9685_SetAction0X01(servo_arr_p, servo_arr_len);
+        case 0x00:
+            LU9685_SetAction0X00(servo_arr_p, servo_arr_len);
             break;
         case 0x02:
             break;
@@ -101,7 +58,7 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
     printf("[lu9685] move servo action done!\n\n");
 }
 
-void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
+void LU9685_SetAction0X00(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     servo_arr_p[0].val = 180;
     servo_arr_p[1].val = 180;
     servo_arr_p[2].val = 180;

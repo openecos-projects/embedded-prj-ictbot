@@ -17,10 +17,8 @@ void main() {
         {12, 0},
         {13, 0}
     };
-    uint8_t      servo_arr_len = LENGTH(servo_arr);
-    uint8_t      servo_action  = 0;
-    // LU9685_Init(&servo_arr, &servo_arr_len);
-    // LU9685_SetAction(servo_arr, servo_arr_len, 1);
+    uint8_t servo_arr_len = LENGTH(servo_arr);
+    uint8_t servo_action  = 0;
 
     while (1) {
         while (((UART_1_REG_LSR & 0x080) >> 7) == 1);
