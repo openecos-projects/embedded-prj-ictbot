@@ -1,6 +1,7 @@
 #ifndef TIMER_H
 #define TIMER_H
 
+#include <klib.h>
 #include <ecos.h>
 
 void Timer_Init();

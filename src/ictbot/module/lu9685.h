@@ -5,6 +5,9 @@
 #include <klib.h>
 #include <klib-macros.h>
 #include <ecos.h>
+#include "../driver/i2c_soft.h"
+#include "../driver/timer.h"
+#include "../util/debug.h"
 
 typedef struct {
     uint8_t num;

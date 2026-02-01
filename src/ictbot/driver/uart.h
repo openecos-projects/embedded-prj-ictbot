@@ -1,9 +1,7 @@
 #ifndef UART_H
 #define UART_H
 
-#include <am.h>
 #include <klib.h>
-#include <klib-macros.h>
 #include <ecos.h>
 #include "../util/debug.h"
 
@@ -19,7 +17,7 @@
 #define UART_STATUS_ERROR   2
 
 void UART_Init(uint32_t baud);
-uint8_t UART_RecvData(uint32_t uart_data, uint8_t *servo_action_p);
+uint8_t UART_RecvData(uint8_t *uart_arr, uint8_t *uart_arr_cnt, uint8_t uart_data, uint8_t *servo_action_p);
 void UART_SendData(uint8_t uart_flag);
 
 #endif
