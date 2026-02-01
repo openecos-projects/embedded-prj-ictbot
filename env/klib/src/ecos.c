@@ -242,16 +242,16 @@ uint32_t GPIO_GetVal_Num(uint32_t gpio, uint32_t pin){
 }
 
 void timer_init(uint32_t div, uint32_t cmp) {
-  printf("TIMER INIT:\n");
+  // printf("TIMER INIT:\n");
   TIMER_0_REG_CTRL = (uint32_t)0x0; // disable timer
   while (TIMER_0_REG_STAT == 1)
     ; // clear irq
   TIMER_0_REG_PSCR = div - 1;
   TIMER_0_REG_CMP = cmp - 1;
 
-  printf("CTRL: %d PSCR: %d CMP: %d\n", TIMER_0_REG_CTRL, TIMER_0_REG_PSCR,
-         TIMER_0_REG_CMP);
-  printf("TIMER INIT DONE\n");
+  // printf("CTRL: %d PSCR: %d CMP: %d\n", TIMER_0_REG_CTRL, TIMER_0_REG_PSCR,
+  //        TIMER_0_REG_CMP);
+  // printf("TIMER INIT DONE\n");
 }
 
 void delay_ms(uint32_t val) {
