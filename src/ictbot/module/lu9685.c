@@ -46,7 +46,7 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
     printf("[lu9685] move servo action 0x%x...\n", servo_action);
     switch (servo_action) {
         case 0x00:
-            LU9685_SetAction0X00(servo_arr_p, servo_arr_len);
+            LU9685_SetAction0X01(servo_arr_p, servo_arr_len);
             break;
         case 0x02:
             break;
@@ -58,7 +58,7 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
     printf("[lu9685] move servo action done!\n\n");
 }
 
-void LU9685_SetAction0X00(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
+void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     servo_arr_p[0].val = 180;
     servo_arr_p[1].val = 180;
     servo_arr_p[2].val = 180;
