@@ -85,25 +85,8 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
 
 void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
     for (uint8_t i = 0; i < 10; i++) {
-        servo_arr_p[0].val = 80;
-        servo_arr_p[1].val = 80;
-        servo_arr_p[2].val = 80;
-        servo_arr_p[3].val = 80;
-        servo_arr_p[4].val = 80;
-        for (uint8_t i = 0; i < 5; i++) {
-            LU9685_SetAngleSingle(servo_arr_p[i].num, servo_arr_p[i].val);
-        }
-        Timer_DelayMs(300);
-
-        servo_arr_p[0].val = 110;
-        servo_arr_p[1].val = 110;
-        servo_arr_p[2].val = 110;
-        servo_arr_p[3].val = 110;
-        servo_arr_p[4].val = 110;
-        for (uint8_t i = 0; i < 5; i++) {
-            LU9685_SetAngleSingle(servo_arr_p[i].num, servo_arr_p[i].val);
-        }
-        Timer_DelayMs(300);
+        SET_SERVO_POS(servo_arr_p,  80,  80,  80,  80,  80);
+        SET_SERVO_POS(servo_arr_p, 110, 110, 110, 110, 110);
     }
 }
 
