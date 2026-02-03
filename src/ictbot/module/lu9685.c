@@ -45,35 +45,29 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
                                                  uint8_t servo_action) {
     printf("[lu9685] move servo action 0x%x...\n", servo_action);
     switch (servo_action) {
+        case 0x00:
+            for (uint8_t i = 0; i < 10; i++) {
+                SET_SERVO_POS(servo_arr_p,  80,  80,  80,  80,  80);
+                SET_SERVO_POS(servo_arr_p, 110, 110, 110, 110, 110);
+            }
+            break;
         case 0x01:
-            LU9685_SetAction0X01(servo_arr_p, servo_arr_len);
             break;
         case 0x02:
-            LU9685_SetAction0X02(servo_arr_p, servo_arr_len);
             break;
         case 0x03:
-            LU9685_SetAction0X03(servo_arr_p, servo_arr_len);
             break;
         case 0x04:
-            LU9685_SetAction0X04(servo_arr_p, servo_arr_len);
             break;
         case 0x05:
-            LU9685_SetAction0X05(servo_arr_p, servo_arr_len);
             break;
         case 0x06:
-            LU9685_SetAction0X06(servo_arr_p, servo_arr_len);
             break;
         case 0x07:
-            LU9685_SetAction0X07(servo_arr_p, servo_arr_len);
             break;
         case 0x08:
-            LU9685_SetAction0X08(servo_arr_p, servo_arr_len);
             break;
         case 0x09:
-            LU9685_SetAction0X09(servo_arr_p, servo_arr_len);
-            break;
-        case 0x0A:
-            LU9685_SetAction0X0A(servo_arr_p, servo_arr_len);
             break;
         default:
             printf("[lu9685] move servo action 0x%x is not supported!\n",
@@ -82,28 +76,3 @@ void LU9685_SetAction(LU9685Struct *servo_arr_p, uint8_t servo_arr_len,
     }
     printf("[lu9685] move servo action done!\n\n");
 }
-
-void LU9685_SetAction0X01(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {
-    for (uint8_t i = 0; i < 10; i++) {
-        SET_SERVO_POS(servo_arr_p,  80,  80,  80,  80,  80);
-        SET_SERVO_POS(servo_arr_p, 110, 110, 110, 110, 110);
-    }
-}
-
-void LU9685_SetAction0X02(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X03(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X04(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X05(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X06(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X07(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X08(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X09(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
-
-void LU9685_SetAction0X0A(LU9685Struct *servo_arr_p, uint8_t servo_arr_len) {}
