@@ -41,21 +41,22 @@ uint8_t UART_RecvData(uint8_t *uart_arr_p,
                uart_arr_p[0], uart_arr_p[1], uart_arr_p[2], uart_checksum);
         printf("[uart] checkbit is %x\n", uart_checkbit);
         memset(uart_arr_p, 0, 4);
+
         *uart_arr_cnt_p = 0;
         if (uart_checksum == uart_checkbit) {
             *servo_action_p = uart_action;
             printf("[uart] checksum is ok!\n");
-            return 1;
+            return UART_STATUS_SUCCESS;
         }
         else {
             printf("[uart] checksum is invalid!\n");
-            return 2;
+            return UART_STATUS_ERROR;
         }
     }
     else {
     }
 
-    return 0;
+    return UART_STATUS_PASS;
 }
 
 void UART_SendData(uint8_t uart_flag) {
