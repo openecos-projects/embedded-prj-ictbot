@@ -7,11 +7,11 @@ void main() {
     Timer_Init();
     I2C_Soft_Init();
     UART_Init(9600);
-    
+
     uint8_t uart_arr[4]  = {0};
     uint8_t uart_arr_cnt =  0;
     LU9685Struct servo_arr[] = {
-        {9, 0},
+        { 9, 0},
         {10, 0},
         {11, 0},
         {12, 0},
@@ -23,9 +23,9 @@ void main() {
     while (1) {
         while (((UART_1_REG_LSR & 0x080) >> 7) == 1);
         uint8_t uart_data = (uint8_t)UART_1_REG_TRX;
-        uint8_t uart_flag = UART_RecvData(uart_arr, 
-                                          &uart_arr_cnt, 
-                                          uart_data, 
+        uint8_t uart_flag = UART_RecvData(uart_arr,
+                                          &uart_arr_cnt,
+                                          uart_data,
                                           &servo_action);
         if (uart_flag == UART_STATUS_SUCCESS) {
             UART_SendData(uart_flag);
