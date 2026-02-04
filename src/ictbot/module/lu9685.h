@@ -7,16 +7,16 @@
 #include "../driver/timer.h"
 #include "../util/debug.h"
 
-#define SET_SERVO_POS(arr, v0, v1, v2, v3, v4) do { \
-    arr[0].val = v0; \
-    arr[1].val = v1; \
-    arr[2].val = v2; \
-    arr[3].val = v3; \
-    arr[4].val = v4; \
-    for (uint8_t i = 0; i < 5; i++) { \
+#define SET_SERVO_POS(arr, v0, v1, v2, v3, v4) do {    \
+    arr[0].val = v0;                                   \
+    arr[1].val = v1;                                   \
+    arr[2].val = v2;                                   \
+    arr[3].val = v3;                                   \
+    arr[4].val = v4;                                   \
+    for (uint8_t i = 0; i < 5; i++) {                  \
         LU9685_SetAngleSingle(arr[i].num, arr[i].val); \
-    } \
-    Timer_DelayMs(300); \
+    }                                                  \
+    Timer_DelayMs(300);                                \
 } while(0)
 
 typedef struct {
