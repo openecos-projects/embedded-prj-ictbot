@@ -4,7 +4,7 @@
 # ==============================================================================
 
 # Application Name
-APP_NAME ?= v1
+APP_NAME ?= ictbot
 # Build Type: flash, mem, or sdram
 APP_TYPE ?= flash
 # Architecture definition
